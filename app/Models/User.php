@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -56,7 +57,7 @@ class User extends Authenticatable
     }
 
     public function setUsernameAttribute() {
-        $this->attributes['username'] = str_slug($this->username, "-");
+        $this->attributes['username'] = Str::slug($this->username, "-");
     }
 
     public function scopeAdmin($query)
