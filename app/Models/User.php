@@ -40,8 +40,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tickets()
-    {
+    public function tickets() {
         return $this->hasMany(Ticket::class);
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('active', function (Builder $builder) {
+            $builder->where('active', 1);
+        });
+    }
+
+    public function getFullNameAttribute() {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function setUsernameAttribute() {
+        $this->attributes['username'] = str_slug($this->username, "-");
+    }
+
+    public function scopeAdmin($query)
+    {
+        $query->where('admin', 1);
     }
 }
