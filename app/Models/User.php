@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable
@@ -48,7 +49,7 @@ class User extends Authenticatable
     protected static function booted()
     {
         static::addGlobalScope('active', function (Builder $builder) {
-            $builder->where('active', 1);
+            $builder->where('is_active', 1);
         });
     }
 
