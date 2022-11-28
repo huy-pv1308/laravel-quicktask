@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('users', UserController::class);
+
+Route::controller(TicketController::class)->prefix('tickets')->name('tickets.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{ticket}', 'show')->name('show');
+    Route::get('/{ticket}/edit', 'edit')->name('edit');
+    Route::put('/{ticket}', 'update')->name('update');
+    Route::delete('/{ticket}', 'destroy')->name('destroy');
+});
