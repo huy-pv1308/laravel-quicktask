@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
 Route::resource('users', UserController::class)->middleware('admin');
 
 Route::controller(TicketController::class)->prefix('tickets')->name('tickets.')->group(function () {
@@ -28,3 +32,5 @@ Route::controller(TicketController::class)->prefix('tickets')->name('tickets.')-
     Route::put('/{ticket}', 'update')->name('update');
     Route::delete('/{ticket}', 'destroy')->name('destroy');
 });
+
+require __DIR__.'/auth.php';
