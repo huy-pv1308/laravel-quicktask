@@ -1,0 +1,14 @@
+{
+    "Email": "Email",
+    "Password": "Mật khẩu",
+    "First Name": "Tên",
+    "Last Name": "Họ",
+    "UserName": "Tên người dùng",
+    "Remember": "Ghi nhớ đăng nhập",
+    "Log in": "Đăng nhập",
+    "Register": "Đăng ký",
+    "Already registered?": "Đã đăng ký?",
+    "Forgot your password?": "Quên mật khẩu?",
+    "Confirm Password": "Xác nhận mật khẩu",
+    "Whoops! Something went wrong.": "Có cái gì đấy sai sai"
+}

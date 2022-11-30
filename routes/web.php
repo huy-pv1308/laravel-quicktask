@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TicketController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +36,8 @@ Route::controller(TicketController::class)->prefix('tickets')->name('tickets.')-
     Route::put('/{ticket}', 'update')->name('update');
     Route::delete('/{ticket}', 'destroy')->name('destroy');
 });
+
+Route::get('lang/{locale}', [LocalizationController::class, 'index'])->name('lang');
+
 
 require __DIR__.'/auth.php';
