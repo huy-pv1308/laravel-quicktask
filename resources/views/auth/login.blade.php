@@ -1,17 +1,65 @@
+<style>
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    
+    li {
+      float: left;
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    li a:hover {
+      background-color: #111;
+    }
+</style>
+
 <x-guest-layout>
+    <ul style="background-color: #333">
+        <li>
+            <a> Language: 
+                @switch(session()->get('locale'))
+                    @case('en')
+                        English
+                        @break
+                    @case('vi')
+                        Vietname
+                        @break
+                    @default
+                        English
+                @endswitch
+            </a>
+        </li>
+        <li>    
+            <a href="{{ route('lang', ['en']) }}"> English </a> 
+        </li>
+        <li>    
+            <a href="{{ route('lang', ['vi']) }}"> Vietnam </a> 
+        <li>
+    </ul>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </a>
         </x-slot>
-
+        
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+        
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -36,10 +84,9 @@
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember') }}</span>
                 </label>
-            </div>
-
+            </div> 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
