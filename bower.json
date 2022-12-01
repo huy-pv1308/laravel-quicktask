@@ -1,0 +1,22 @@
+{
+  "name": "laravel-quicktask",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Pham Vu Huy <pham.vu.huy@sun-asterisk.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/huy-pv1308/laravel-quicktask",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.6.1",
+    "bootstrap": "^5.2.3"
+  }
+}
