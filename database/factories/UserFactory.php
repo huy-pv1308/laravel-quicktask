@@ -17,13 +17,13 @@ class UserFactory extends Factory
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'username' => $this->faker->userName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt($this->faker->password(6)), // password
             'remember_token' => Str::random(10),
             'is_active' => $this->faker->boolean,
             'is_admin' => false,
+            'username' => Str::random(10),
         ];
     }
 
