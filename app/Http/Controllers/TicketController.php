@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use App\Http\Requests\TicketRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
@@ -14,7 +17,9 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = Ticket::with('user')->get();   
+
+        return view('ticket.index', compact('tickets'));
     }
 
     /**
@@ -24,7 +29,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        return view('ticket.create');
     }
 
     /**
@@ -33,9 +38,15 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TicketRequest $request)
     {
-        //
+        DB::table('tickets')->insert([
+            'movie_name' => $request->movie_name,
+            'time_show' => $request->time_show,
+            'user_id' => Auth::id(),
+        ]);
+
+        return redirect()->route('tickets.index');
     }
 
     /**
@@ -57,7 +68,9 @@ class TicketController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ticket = DB::table('tickets')->find($id);
+
+        return view('ticket.edit', compact('ticket'));
     }
 
     /**
@@ -67,9 +80,16 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TicketRequest $request, $id)
     {
-        //
+        DB::table('tickets')
+            ->where('id', $id)
+            ->update([
+                'movie_name' => $request->movie_name,
+                'time_show' => $request->time_show,
+            ]);
+    
+        return redirect()->route('tickets.index');
     }
 
     /**
@@ -80,6 +100,8 @@ class TicketController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('tickets')->where('id', $id)->delete();
+
+        return redirect()->route('tickets.index');
     }
 }

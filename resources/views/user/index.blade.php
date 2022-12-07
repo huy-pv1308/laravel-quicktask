@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Users') }}
+            {{ __('temp.user') }}
         </h2>
     </x-slot>
 
@@ -11,52 +11,52 @@
                 <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
                     <div class="min-w-full align-middle">
                         <a href="{{ route('users.create') }}" class="text-xs leading-4 font-medium text-red-500 uppercase tracking-wider"> 
-                            {{ __('Add User') }} 
+                            {{ __('temp.cuser') }} 
                         </a>
                         <table class="min-w-full divide-y divide-gray-200 border">
                             <thead>
                             <tr>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        {{ __('No') }}
+                                        {{ __('temp.num') }}
                                     </span>
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        {{ __('Username') }}
+                                        {{ __('temp.uname') }}
                                     </span>
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        {{ __('Email') }}
+                                        {{ __('temp.mail') }}
                                     </span>
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        {{ __('First Name') }}
+                                        {{ __('temp.fname') }}
                                     </span>
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        {{ __('Last Name') }}
+                                        {{ __('temp.lname') }}
                                     </span>
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        {{ __('Action') }}
+                                        {{ __('temp.act') }}
                                     </span>
                                 </th>
                             </tr>
                             </thead>
 
                             <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-                            @foreach($users as $user)
+                            @foreach ($users as $user)
                                 <tr class="bg-white">
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                         {{ $loop->iteration }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                        <a href="{{ route('users.show',$user->id) }}"> {{ $user->username }} </a>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-red-500">
+                                        <a href="{{ route('users.show', $user->id) }}"> {{ $user->username }} </a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                         {{ $user->email }}
@@ -67,9 +67,14 @@
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                         {{ $user->last_name }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                        <a href="{{ route('users.edit',$user->id) }}"> {{ __('Edit') }} </a>
-                                        <a href="{{ route('users.destroy',$user->id) }}"> {{ __('Delete') }} </a>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-red-500">
+                                        <a href="{{ route('users.edit', $user->id) }}"> {{ __('temp.edit') }} </a>
+                                        <br/>
+                                        <form action="{{ route('users.destroy', $user->id ) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class=" btn fa fa-trash text-danger js-btn-delete"> {{__('temp.delete') }}</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
