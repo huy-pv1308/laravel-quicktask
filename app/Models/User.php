@@ -57,8 +57,8 @@ class User extends Authenticatable
         return "{$this->first_name} {$this->last_name}";
     }
 
-    public function setUsernameAttribute() {
-        $this->attributes['username'] = Str::slug($this->username, "-");
+    public function setUsernameAttribute($username) {
+        $this->attributes['username'] = Str::slug($username, "-");
     }
 
     public function scopeAdmin($query)

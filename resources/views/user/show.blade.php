@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tickets') }}
+            {{ __('temp.ticket') }}
         </h2>
     </x-slot>
 
@@ -11,36 +11,36 @@
                 <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
                     <div class="min-w-full align-middle">
                         <a href="{{ route('tickets.create') }}" class="text-xs leading-4 font-medium text-red-500 uppercase tracking-wider"> 
-                            {{ __('Add Ticket') }} 
+                            {{ __('temp.cticket') }} 
                         </a>
                         <table class="min-w-full divide-y divide-gray-200 border">
                             <thead>
                             <tr>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        {{ __('No') }}
+                                        {{ __('temp.num') }}
                                     </span>
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        {{ __('Movie Name') }}
+                                        {{ __('temp.movie') }}
                                     </span>
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        {{ __('Time Show') }}
+                                        {{ __('temp.time') }}
                                     </span>
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left">
                                     <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        {{ __('Action') }}
+                                        {{ __('temp.act') }}
                                     </span>
                                 </th>
                             </tr>
                             </thead>
 
                             <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-                            @foreach($tickets as $ticket)
+                            @foreach ($tickets as $ticket)
                                 <tr class="bg-white">
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                         {{ $loop->iteration }}
@@ -50,9 +50,14 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                         {{ $ticket->time_show }}
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                        <a href="{{ route('tickets.edit',$ticket->id) }}"> {{ __('Edit') }} </a>
-                                        <a href="{{ route('tickets.destroy',$ticket->id) }}"> {{ __('Delete') }} </a>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-red-500">
+                                        <a href="{{ route('tickets.edit', $ticket->id) }}"> {{ __('temp.edit') }} </a>
+                                        <br/>
+                                        <form action="{{ route('tickets.destroy', $ticket->id ) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class=" btn fa fa-trash text-danger js-btn-delete"> {{ __('temp.delete') }}</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
